@@ -4,6 +4,8 @@ using AutoMapper;
 using Domain.Entities;
 using Bogus.Extensions.Brazil;
 using Bogus;
+using Infra;
+using Microsoft.EntityFrameworkCore;
 namespace Tests.Commom
 {
 
@@ -36,6 +38,15 @@ namespace Tests.Commom
             usuario.Email = _faker.Person.Email;
             usuario.Senha = _faker.Internet.Password();
             return usuario;
+        }
+
+
+        public DatabaseContext CreateInMemoryDatabaseContext()
+        {
+            var opt = new DbContextOptionsBuilder<DatabaseContext>()
+               .UseInMemoryDatabase(databaseName: DateTime.Now.Ticks.ToString()).Options;
+            var context = new DatabaseContext(opt);
+            return context;
         }
     }
 

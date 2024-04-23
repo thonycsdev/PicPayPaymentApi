@@ -30,8 +30,8 @@ namespace Application.UseCases.Usuarios.Transferencia
             payer.Saldo -= amount;
             receiver.Saldo += amount;
 
-            await _repository.Update(payer);
-            await _repository.Update(receiver);
+            _repository.Update(payer);
+            _repository.Update(receiver);
 
             await _repository.Commit();
 

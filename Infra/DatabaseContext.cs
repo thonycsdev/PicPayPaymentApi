@@ -9,7 +9,7 @@ namespace Infra
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Lojista> Lojistas { get; set; }
 
-        public DatabaseContext()
+        public DatabaseContext(DbContextOptions<DatabaseContext> opts) : base(opts)
         {
         }
 
@@ -21,7 +21,10 @@ namespace Infra
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=local_user;Password=local_password;Database=transactions_local_database");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=local_user;Password=local_password;Database=transactions_local_database");
+            }
         }
 
     }

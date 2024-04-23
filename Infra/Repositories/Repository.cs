@@ -1,38 +1,50 @@
+using Domain.Entities;
 using Infra.RepositoriesInterfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories
 {
 
-    public class Repository<T> : IRepository<T>
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        public Task Commit()
+        private readonly DbSet<T> _entity;
+        private readonly DatabaseContext _context;
+        public Repository(DatabaseContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _entity = context.Set<T>();
+        }
+        public async Task Commit()
+        {
+            await _context.SaveChangesAsync();
         }
 
-        public Task Create(T entity)
+        public async Task Create(T entity)
         {
-            throw new NotImplementedException();
+            await _entity.AddAsync(entity);
         }
 
-        public Task Delete(T entity)
+        public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _entity.Remove(entity);
         }
 
-        public Task<List<T>> GetAll()
+        public async Task<List<T>> GetAll()
         {
-            throw new NotImplementedException();
+            var result = await _entity.ToListAsync();
+            return result;
         }
 
-        public Task<T> GetById(Guid id)
+        public async Task<T> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await _entity.FirstOrDefaultAsync(x => x.Id == id);
+            return result;
         }
 
-        public Task<T> Update(T entity)
+        public T Update(T entity)
         {
-            throw new NotImplementedException();
+            _context.Update(entity);
+            return entity;
         }
     }
 }

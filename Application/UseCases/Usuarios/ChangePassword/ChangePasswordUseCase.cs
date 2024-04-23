@@ -21,7 +21,7 @@ namespace Application.UseCases.Usuarios.ChangePassword
 
             var usuario = await _repository.GetById(id);
             usuario.Senha = newPassword;
-            await _repository.Update(usuario);
+            _repository.Update(usuario);
             await _repository.Commit();
             var response = new UsuarioResponse()
             {

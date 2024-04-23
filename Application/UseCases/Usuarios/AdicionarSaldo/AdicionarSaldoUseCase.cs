@@ -21,7 +21,7 @@ namespace Application.UseCases.Usuarios.AdicionarSaldo
                 return rsp.ReturnError($"Saldo invalido: {valor}");
 
             usuario.Saldo += valor;
-            await _repository.Update(usuario);
+            _repository.Update(usuario);
             await _repository.Commit();
             return rsp.ReturnSucess($"Novo saldo:{usuario.Saldo}");
         }

@@ -19,7 +19,7 @@ namespace Application.UseCases.Usuarios.Delete
             if (entity is null)
                 return rsp.ReturnNotFound(null);
 
-            await _repository.Delete(entity);
+            _repository.Delete(entity);
             await _repository.Commit();
             return rsp.ReturnSucess(null);
         }

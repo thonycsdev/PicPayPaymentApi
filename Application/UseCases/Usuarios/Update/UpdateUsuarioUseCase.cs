@@ -25,7 +25,7 @@ namespace Application.UseCases.Usuarios.Delete
             entity.Saldo = data.Saldo;
             entity.Email = data.Email;
             entity.CPF = data.CPF;
-            await _repository.Update(entity);
+            _repository.Update(entity);
             await _repository.Commit();
             var usuarioResponse = new UsuarioResponse()
             {
