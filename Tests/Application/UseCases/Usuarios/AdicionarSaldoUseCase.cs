@@ -47,6 +47,7 @@ namespace Tests.Application.UseCases.Usuarios
 
 
         }
+        [Fact]
         public async void ShouldReturnNotFoundWhenUsuarioWithIdWasNotMatched()
         {
             var usuario1 = _fixture.Create<UsuarioRequest>();
