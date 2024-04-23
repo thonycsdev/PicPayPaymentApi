@@ -2,24 +2,19 @@ using Application.DTOs.Request;
 using Application.DTOs.Response;
 using Application.UseCases.Usuarios.Delete;
 using AutoFixture;
-using Bogus;
-using Domain.Entities;
 using FluentAssertions;
 using Infra.RepositoriesInterfaces;
 using Moq;
+using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
 
-    public class UpdateUsuarioUseCaseTest
+    public class UpdateUsuarioUseCaseTest : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
-        public Fixture _fixture;
-        public Faker _faker;
         public UpdateUsuarioUseCaseTest()
         {
-            _fixture = new Fixture();
-            _faker = new Faker();
             _repositoryMock = new Mock<IUsuarioRepository>();
         }
 
@@ -27,7 +22,7 @@ namespace Tests.Application.UseCases.Usuarios
         public async void ShouldUpdateTheOldUsuarioDataWithTheNewOne()
         {
             var usuario1 = _fixture.Create<UsuarioRequest>();
-            var usuario2 = _fixture.Create<Usuario>();
+            var usuario2 = CreateValidUsuario();
             _repositoryMock.Setup(x => x.GetById(usuario2.Id)).ReturnsAsync(usuario2);
 
             var uc = new UpdateUsuarioUseCase(_repositoryMock.Object);
@@ -47,7 +42,7 @@ namespace Tests.Application.UseCases.Usuarios
         public async void ShouldReturnNotFoundWhenUsuarioWithIdWasNotMatched()
         {
             var usuario1 = _fixture.Create<UsuarioRequest>();
-            var usuario2 = _fixture.Create<Usuario>();
+            var usuario2 = CreateValidUsuario();
             _repositoryMock.Setup(x => x.GetById(usuario2.Id));
 
             var uc = new UpdateUsuarioUseCase(_repositoryMock.Object);

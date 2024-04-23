@@ -2,24 +2,20 @@ using Application.DTOs.Request;
 using Application.DTOs.Response;
 using Application.UseCases.Usuarios.Create;
 using AutoFixture;
-using Bogus;
 using Domain.Entities;
 using FluentAssertions;
 using Infra.RepositoriesInterfaces;
 using Moq;
+using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
 
-    public class CreateUsuarioUseCaseTests
+    public class CreateUsuarioUseCaseTests : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
-        public Fixture _fixture;
-        public Faker _faker;
         public CreateUsuarioUseCaseTests()
         {
-            _fixture = new Fixture();
-            _faker = new Faker();
             _repositoryMock = new Mock<IUsuarioRepository>();
         }
 
@@ -27,10 +23,8 @@ namespace Tests.Application.UseCases.Usuarios
         public void ShouldCreateANewUsuarioOnTheDatabase()
         {
 
-            //mapear a entrada manualmente
             var usuarioInput = _fixture.Create<UsuarioRequest>();
             usuarioInput.Email = _faker.Person.Email;
-            //criar commit dentro da IRepository
             var uc = new CreateUsuarioUseCase(_repositoryMock.Object);
 
             var listaUsuarios = new List<Usuario>();

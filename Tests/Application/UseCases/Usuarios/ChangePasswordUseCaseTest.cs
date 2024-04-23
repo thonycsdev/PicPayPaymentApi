@@ -1,31 +1,26 @@
 using Application.DTOs.Response;
 using Application.UseCases.Usuarios.ChangePassword;
-using AutoFixture;
-using Bogus;
 using Domain.Entities;
 using FluentAssertions;
 using Infra.RepositoriesInterfaces;
 using Moq;
+using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
 
-    public class ChangePasswordUseCaseTest
+    public class ChangePasswordUseCaseTest : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
-        public Fixture _fixture;
-        public Faker _faker;
         public ChangePasswordUseCaseTest()
         {
-            _fixture = new Fixture();
-            _faker = new Faker();
             _repositoryMock = new Mock<IUsuarioRepository>();
         }
 
         [Fact]
         public async void ShouldUpdateTheUserPassword()
         {
-            var usuario1 = _fixture.Create<Usuario>();
+            var usuario1 = CreateValidUsuario();
 
             var newPassword = _faker.Internet.Password();
 
@@ -43,7 +38,7 @@ namespace Tests.Application.UseCases.Usuarios
         [Fact]
         public async void ShouldReturnErrorWhenUserInsertInvalidPassword()
         {
-            var usuario1 = _fixture.Create<Usuario>();
+            var usuario1 = CreateValidUsuario();
 
             var newPassword = string.Empty;
 

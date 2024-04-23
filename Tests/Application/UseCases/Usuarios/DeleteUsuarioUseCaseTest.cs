@@ -1,32 +1,27 @@
 using Application.DTOs.Response;
 using Application.UseCases.Usuarios.Delete;
-using AutoFixture;
-using Bogus;
 using Domain.Entities;
 using FluentAssertions;
 using Infra.RepositoriesInterfaces;
 using Moq;
+using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
 
-    public class DeleteUsuarioUseCaseTest
+    public class DeleteUsuarioUseCaseTest : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
-        public Fixture _fixture;
-        public Faker _faker;
         public DeleteUsuarioUseCaseTest()
         {
-            _fixture = new Fixture();
-            _faker = new Faker();
             _repositoryMock = new Mock<IUsuarioRepository>();
         }
 
         [Fact]
         public async void ShouldReturn200WhenTheUsuarioGetsDeleted()
         {
-            var usuario1 = _fixture.Create<Usuario>();
-            var usuario2 = _fixture.Create<Usuario>();
+            var usuario1 = CreateValidUsuario();
+            var usuario2 = CreateValidUsuario();
 
             var listaUsuario = new List<Usuario>() { usuario1, usuario2 };
             _repositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).ReturnsAsync(usuario1);
@@ -43,7 +38,7 @@ namespace Tests.Application.UseCases.Usuarios
         [Fact]
         public async void ShouldReturnNotFoundWhenTheUserIdDoesntMatch()
         {
-            var usuario1 = _fixture.Create<Usuario>();
+            var usuario1 = CreateValidUsuario();
 
             var listaUsuario = new List<Usuario>() { usuario1 };
             _repositoryMock.Setup(x => x.GetById(It.IsAny<Guid>()));

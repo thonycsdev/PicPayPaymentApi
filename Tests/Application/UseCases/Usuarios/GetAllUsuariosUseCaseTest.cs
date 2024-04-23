@@ -1,24 +1,19 @@
 using Application.DTOs.Response;
 using Application.UseCases.Usuarios.GetAll;
-using AutoFixture;
-using Bogus;
 using Domain.Entities;
 using FluentAssertions;
 using Infra.RepositoriesInterfaces;
 using Moq;
+using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
 
-    public class GetAllUseCaseTest
+    public class GetAllUseCaseTest : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
-        public Fixture _fixture;
-        public Faker _faker;
         public GetAllUseCaseTest()
         {
-            _fixture = new Fixture();
-            _faker = new Faker();
             _repositoryMock = new Mock<IUsuarioRepository>();
         }
 
@@ -28,7 +23,7 @@ namespace Tests.Application.UseCases.Usuarios
 
             var usuarios = new List<Usuario>();
             for (int x = 0; x < 5; x++)
-                usuarios.Add(_fixture.Create<Usuario>());
+                usuarios.Add(CreateValidUsuario());
 
             _repositoryMock.Setup(x => x.GetAll()).ReturnsAsync(usuarios);
 

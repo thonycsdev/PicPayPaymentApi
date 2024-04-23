@@ -3,31 +3,26 @@ using Application.DTOs.Response;
 using Application.UseCases.Usuarios.AdicionarSaldo;
 using Application.UseCases.Usuarios.Delete;
 using AutoFixture;
-using Bogus;
-using Domain.Entities;
 using FluentAssertions;
 using Infra.RepositoriesInterfaces;
 using Moq;
+using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
 
-    public class AdicionarSaldoUseCaseTest
+    public class AdicionarSaldoUseCaseTest : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
-        public Fixture _fixture;
-        public Faker _faker;
         public AdicionarSaldoUseCaseTest()
         {
-            _fixture = new Fixture();
-            _faker = new Faker();
             _repositoryMock = new Mock<IUsuarioRepository>();
         }
 
         [Fact]
         public async void ShouldUpdateTheOldUsuarioDataWithTheNewOne()
         {
-            var usuario = _fixture.Create<Usuario>();
+            var usuario = CreateValidUsuario();
             var oldSaldo = usuario.Saldo;
             _repositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).ReturnsAsync(usuario);
 
@@ -51,7 +46,7 @@ namespace Tests.Application.UseCases.Usuarios
         public async void ShouldReturnNotFoundWhenUsuarioWithIdWasNotMatched()
         {
             var usuario1 = _fixture.Create<UsuarioRequest>();
-            var usuario2 = _fixture.Create<Usuario>();
+            var usuario2 = CreateValidUsuario();
             _repositoryMock.Setup(x => x.GetById(usuario2.Id));
 
             var uc = new UpdateUsuarioUseCase(_repositoryMock.Object);
