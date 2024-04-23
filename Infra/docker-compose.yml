@@ -1,0 +1,17 @@
+version: '3.8'  # The Docker Compose file version
+
+services:
+  postgres:
+    image: postgres:16  # The PostgreSQL version to use
+    environment:  # Environment variables to set PostgreSQL user and database
+      POSTGRES_USER: local_user
+      POSTGRES_PASSWORD: local_password # Password for the default user
+      POSTGRES_DB: transactions_local_database # Default database to create on startup
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistent storage for the database
+    ports:
+      - "5432:5432"  # Expose the PostgreSQL port to the host for external access
+
+volumes:
+  postgres_data:  # Define a named volume to persist PostgreSQL data
+
