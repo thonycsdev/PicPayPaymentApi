@@ -29,8 +29,7 @@ namespace Tests.Application.UseCases.Usuarios
 
             var uc = new GetAllUsuariosUseCase(_repositoryMock.Object);
 
-            var results = await uc.Handle();
-
+            var results = await uc.Handle(new GetAllUsuariosQuery(), CancellationToken.None);
             results.Status.Should().Be(StatusCodeObjectResponse.Sucess);
             results.Data.Should().HaveCount(5);
         }
