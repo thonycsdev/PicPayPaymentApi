@@ -27,8 +27,8 @@ namespace Tests.Application.UseCases.Usuarios
             _repositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).ReturnsAsync(listResult.First(x => x.Id == usuario1.Id));
 
             var uc = new GetUserByIdUseCase(_repositoryMock.Object);
-
-            var result = await uc.Handle(usuario1.Id);
+            var input = new GetUsuarioByIdQuery(usuario1.Id);
+            var result = await uc.Handle(input, CancellationToken.None);
 
             result.Data.Should().NotBeNull();
             result.Data!.Id.Should().Be(usuario1.Id);
@@ -49,7 +49,8 @@ namespace Tests.Application.UseCases.Usuarios
             _repositoryMock.Setup(x => x.GetById(It.IsAny<Guid>()));
             var uc = new GetUserByIdUseCase(_repositoryMock.Object);
 
-            var result = await uc.Handle(usuario1.Id);
+            var input = new GetUsuarioByIdQuery(usuario1.Id);
+            var result = await uc.Handle(input, CancellationToken.None);
             result.Data.Should().BeNull();
             result.Status.Should().Be(StatusCodeObjectResponse.NotFound);
             result.Message[0].Should().Be("Usuario nao encontrado");

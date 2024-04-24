@@ -22,11 +22,13 @@ namespace CrossCutting.DependencyInjection.RepositoryDI
             service.AddScoped<IDeleteUsuarioUseCase, DeleteUsuarioUseCase>();
             service.AddScoped<IGetAllUsuariosUseCase, GetAllUsuariosUseCase>();
             service.AddScoped<IUpdateUsuarioUseCase, UpdateUsuarioUseCase>();
-            service.AddScoped<IGetUsuarioByIdUseCase, GetUserByIdUseCase>();
             service.AddScoped<ITransferenciaSaldoUseCase, TransferenciaUseCase>();
 
             //auto mapper
             service.AddAutoMapper(typeof(AutoMapperConfigProfile));
+            //mediatr
+            //
+            service.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(GetUsuarioByIdQuery).Assembly));
 
 
         }

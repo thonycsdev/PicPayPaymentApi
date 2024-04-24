@@ -20,7 +20,7 @@ namespace Tests.Application.UseCases.Usuarios
         }
 
         [Fact]
-        public void ShouldCreateANewUsuarioOnTheDatabase()
+        public async void ShouldCreateANewUsuarioOnTheDatabase()
         {
 
             var usuarioInput = _fixture.Create<UsuarioRequest>();
@@ -32,7 +32,7 @@ namespace Tests.Application.UseCases.Usuarios
             {
                 listaUsuarios.Add(x);
             });
-            var result = uc.Handle(usuarioInput);
+            var result = await uc.Handle(usuarioInput, CancellationToken.None);
 
             listaUsuarios.Count.Should().Be(1);
             _repositoryMock.Verify(x => x.Commit(), Times.Once);
@@ -42,11 +42,11 @@ namespace Tests.Application.UseCases.Usuarios
 
         [Fact]
 
-        public void NotGivenANameInUsuarioRequestShouldReturnObjectErrorWithAMessage()
+        public async Task NotGivenANameInUsuarioRequestShouldReturnObjectErrorWithAMessageAsync()
         {
             var usuarioInput = _fixture.Build<UsuarioRequest>().Without(x => x.Nome).Create();
             var uc = new CreateUsuarioUseCase(_repositoryMock.Object);
-            var result = uc.Handle(usuarioInput);
+            var result = await uc.Handle(usuarioInput, CancellationToken.None);
             result.Status.Should().Be(StatusCodeObjectResponse.Error);
             result.Message[0].Should().Be("Nome invalido");
         }

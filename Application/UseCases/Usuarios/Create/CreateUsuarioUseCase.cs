@@ -13,11 +13,9 @@ namespace Application.UseCases.Usuarios.Create
             _repository = repository;
 
         }
-
-        public ObjectResponse<UsuarioResponse> Handle(UsuarioRequest input)
+        public async Task<ObjectResponse<UsuarioResponse>> Handle(UsuarioRequest request, CancellationToken cancellationToken)
         {
-
-            var entity = UsuarioRequest.ToEntity(input);
+            var entity = UsuarioRequest.ToEntity(request);
             var validator = new BaseEntityValidation();
             var validationResults = validator.Validate(entity);
             var rsp = new ObjectResponse<UsuarioResponse>();
@@ -27,8 +25,8 @@ namespace Application.UseCases.Usuarios.Create
                 return rsp.ReturnError(null);
 
             }
-            _repository.Create(entity);
-            _repository.Commit();
+            await _repository.Create(entity);
+            await _repository.Commit();
 
             return rsp.ReturnSucess(null);
 

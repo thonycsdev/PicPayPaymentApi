@@ -12,9 +12,9 @@ namespace Application.UseCases.Usuarios.GetById
 
         }
 
-        public async Task<ObjectResponse<UsuarioResponse>> Handle(Guid id)
+        public async Task<ObjectResponse<UsuarioResponse>> Handle(GetUsuarioByIdQuery request, CancellationToken cancellationToken)
         {
-            var result = await _repository.GetById(id);
+            var result = await _repository.GetById(request.Id);
             var rsp = new ObjectResponse<UsuarioResponse>();
 
             if (result is null)
@@ -30,7 +30,6 @@ namespace Application.UseCases.Usuarios.GetById
             response.Saldo = result.Saldo;
 
             return rsp.ReturnSucess(response);
-
         }
     }
 }

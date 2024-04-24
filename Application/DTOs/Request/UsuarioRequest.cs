@@ -1,8 +1,10 @@
+using Application.DTOs.Response;
 using Domain.Entities;
+using MediatR;
 
 namespace Application.DTOs.Request
 {
-    public class UsuarioRequest
+    public class UsuarioRequest : IRequest<ObjectResponse<UsuarioResponse>>
     {
         public string Nome { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;

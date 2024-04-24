@@ -1,10 +1,9 @@
 
 using Application.DTOs.Response;
-
+using MediatR;
 namespace Application.UseCases.Usuarios.GetById
 {
-    public interface IGetUsuarioByIdUseCase
+    public interface IGetUsuarioByIdUseCase : IRequestHandler<GetUsuarioByIdQuery, ObjectResponse<UsuarioResponse>>
     {
-        Task<ObjectResponse<UsuarioResponse>> Handle(Guid id);
     }
 }
