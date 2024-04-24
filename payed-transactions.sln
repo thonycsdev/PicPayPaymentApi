@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra", "Infra\Infra.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{792B2666-D4A7-43E4-A0CD-18648004D1B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossCutting", "CrossCutting\CrossCutting.csproj", "{E60D3909-8A05-44B4-98BE-123CA05C94E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{7A263198-A6A3-403B-9497-C65E22FCF0B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{792B2666-D4A7-43E4-A0CD-18648004D1B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{792B2666-D4A7-43E4-A0CD-18648004D1B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{792B2666-D4A7-43E4-A0CD-18648004D1B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E60D3909-8A05-44B4-98BE-123CA05C94E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E60D3909-8A05-44B4-98BE-123CA05C94E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E60D3909-8A05-44B4-98BE-123CA05C94E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E60D3909-8A05-44B4-98BE-123CA05C94E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A263198-A6A3-403B-9497-C65E22FCF0B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A263198-A6A3-403B-9497-C65E22FCF0B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A263198-A6A3-403B-9497-C65E22FCF0B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A263198-A6A3-403B-9497-C65E22FCF0B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
