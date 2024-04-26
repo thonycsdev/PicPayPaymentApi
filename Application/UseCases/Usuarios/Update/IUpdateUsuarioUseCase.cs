@@ -1,10 +1,9 @@
-using Application.DTOs.Request;
 using Application.DTOs.Response;
+using MediatR;
 
 namespace Application.UseCases.Usuarios.Update
 {
-    public interface IUpdateUsuarioUseCase
+    public interface IUpdateUsuarioUseCase : IRequestHandler<UpdateUsuarioRequest, ObjectResponse<UsuarioResponse>>
     {
-        Task<ObjectResponse<UsuarioResponse>> Handle(UsuarioRequest req, Guid id);
     }
 }

@@ -12,9 +12,9 @@ namespace Application.UseCases.Usuarios.Delete
             _repository = repository;
         }
 
-        public async Task<ObjectResponse<UsuarioResponse>> Handle(Guid id)
+        public async Task<ObjectResponse<UsuarioResponse>> Handle(DeleteUsuarioById request, CancellationToken cancellationToken)
         {
-            var entity = await _repository.GetById(id);
+            var entity = await _repository.GetById(request.Id);
             var rsp = new ObjectResponse<UsuarioResponse>();
             if (entity is null)
                 return rsp.ReturnNotFound(null);

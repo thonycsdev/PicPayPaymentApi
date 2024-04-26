@@ -24,6 +24,7 @@ namespace Tests.Application.UseCases.Usuarios
         {
 
             var usuarioInput = _fixture.Create<UsuarioRequest>();
+            _fixture.Create<LojistaRequest>();
             usuarioInput.Email = _faker.Person.Email;
             var uc = new CreateUsuarioUseCase(_repositoryMock.Object);
 

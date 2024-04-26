@@ -1,8 +1,9 @@
-using Application.DTOs.Request;
 using Application.DTOs.Response;
 using Application.UseCases.Usuarios.AdicionarSaldo;
 using Application.UseCases.Usuarios.Delete;
+using Application.UseCases.Usuarios.Update;
 using AutoFixture;
+using Domain.Entities;
 using FluentAssertions;
 using Infra.RepositoriesInterfaces;
 using Moq;
@@ -45,16 +46,18 @@ namespace Tests.Application.UseCases.Usuarios
         [Fact]
         public async void ShouldReturnNotFoundWhenUsuarioWithIdWasNotMatched()
         {
-            var usuario1 = _fixture.Create<UsuarioRequest>();
-            var usuario2 = CreateValidUsuario();
-            _repositoryMock.Setup(x => x.GetById(usuario2.Id));
+            var request = _fixture.Create<UpdateUsuarioRequest>();
 
+            var usuario = _fixture.Create<Usuario>();
+
+            usuario.Id = request.usuario_toEdit_Id;
+
+            _repositoryMock.Setup(x => x.GetById(usuario.Id));
             var uc = new UpdateUsuarioUseCase(_repositoryMock.Object);
 
-            var result = await uc.Handle(usuario1, usuario2.Id);
+            var result = await uc.Handle(request, CancellationToken.None);
 
             result.Status.Should().Be(StatusCodeObjectResponse.Error);
-
         }
     }
 }

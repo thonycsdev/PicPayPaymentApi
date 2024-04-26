@@ -28,6 +28,16 @@ namespace Tests.Commom
         }
 
 
+        public Lojista CreateValidLojista()
+        {
+            var lojista = new Lojista();
+            lojista.Id = Guid.NewGuid();
+            lojista.Nome = _faker.Person.FullName;
+            lojista.CNPJ = _faker.Company.Cnpj();
+            lojista.Email = _faker.Person.Email;
+            lojista.Senha = _faker.Internet.Password();
+            return lojista;
+        }
 
         public Usuario CreateValidUsuario()
         {

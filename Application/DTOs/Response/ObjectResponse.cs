@@ -8,7 +8,6 @@ namespace Application.DTOs.Response
         public T? Data { get; set; }
 
         //preciso deixar mais simples a forma de como eu crio os erros nos UCs
-        //
 
         public ObjectResponse<T> ReturnSucess(T? data)
         {

@@ -7,15 +7,17 @@ namespace Application.UseCases.Usuarios.GetAll
     public class GetAllUsuariosUseCase : IGetAllUsuariosUseCase
     {
         private readonly IUsuarioRepository _repository;
+
         public GetAllUsuariosUseCase(IUsuarioRepository repository)
         {
             _repository = repository;
         }
-        public async Task<ObjectResponse<List<UsuarioResponse>>> Handle()
+
+
+        public async Task<ObjectResponse<IEnumerable<UsuarioResponse>>> Handle(GetAllUsuariosQuery request, CancellationToken cancellationToken)
         {
             var results = await _repository.GetAll();
-
-            var rsp = new ObjectResponse<List<UsuarioResponse>>();
+            var rsp = new ObjectResponse<IEnumerable<UsuarioResponse>>();
             var response = results.Select(x =>
             {
                 var output = new UsuarioResponse()
@@ -29,7 +31,7 @@ namespace Application.UseCases.Usuarios.GetAll
                 return output;
             }).ToList();
             rsp.Status = StatusCodeObjectResponse.Sucess;
-            rsp.Data = response;
+            rsp.Data = response.ToList();
             return rsp;
         }
     }

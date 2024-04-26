@@ -24,11 +24,14 @@ namespace Tests.Application.UseCases.Usuarios
             var usuario2 = CreateValidUsuario();
 
             var listaUsuario = new List<Usuario>() { usuario1, usuario2 };
+            var input = new DeleteUsuarioById(usuario1.Id);
+
             _repositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).ReturnsAsync(usuario1);
             _repositoryMock.Setup(x => x.Delete(usuario1)).Callback<Usuario>(x => listaUsuario.Remove(x));
+
             var uc = new DeleteUsuarioUseCase(_repositoryMock.Object);
 
-            var result = await uc.Handle(usuario1.Id);
+            var result = await uc.Handle(input, CancellationToken.None);
 
             result.Status.Should().Be(StatusCodeObjectResponse.Sucess);
             listaUsuario.Count.Should().Be(2 - 1);
@@ -40,11 +43,12 @@ namespace Tests.Application.UseCases.Usuarios
         {
             var usuario1 = CreateValidUsuario();
 
+            var input = new DeleteUsuarioById(usuario1.Id);
             var listaUsuario = new List<Usuario>() { usuario1 };
             _repositoryMock.Setup(x => x.GetById(It.IsAny<Guid>()));
             var uc = new DeleteUsuarioUseCase(_repositoryMock.Object);
 
-            var result = await uc.Handle(usuario1.Id);
+            var result = await uc.Handle(input, CancellationToken.None);
 
             result.Status.Should().Be(StatusCodeObjectResponse.NotFound);
 

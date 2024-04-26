@@ -14,10 +14,10 @@ namespace Application.UseCases.Usuarios.Delete
             _repository = repository;
         }
 
-        public async Task<ObjectResponse<UsuarioResponse>> Handle(UsuarioRequest req, Guid id)
+        public async Task<ObjectResponse<UsuarioResponse>> Handle(UpdateUsuarioRequest request, CancellationToken cancellationToken)
         {
-            var data = UsuarioRequest.ToEntity(req);
-            var entity = await _repository.GetById(id);
+            var data = UsuarioRequest.ToEntity(request.request);
+            var entity = await _repository.GetById(request.usuario_toEdit_Id);
             var rsp = new ObjectResponse<UsuarioResponse>();
             if (entity is null)
                 return rsp.ReturnError(null);
@@ -36,7 +36,6 @@ namespace Application.UseCases.Usuarios.Delete
                 Nome = entity.Nome
             };
             return rsp.ReturnSucess(usuarioResponse);
-
         }
     }
 }

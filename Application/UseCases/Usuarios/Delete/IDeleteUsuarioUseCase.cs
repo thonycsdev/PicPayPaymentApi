@@ -1,11 +1,12 @@
 using Application.DTOs.Response;
+using Domain.Entities;
+using MediatR;
 
 namespace Application.UseCases.Usuarios.Delete
 {
 
-    public interface IDeleteUsuarioUseCase
+    public interface IDeleteUsuarioUseCase : IRequestHandler<DeleteUsuarioById, ObjectResponse<UsuarioResponse>>
     {
-        Task<ObjectResponse<UsuarioResponse>> Handle(Guid id);
     }
 
 }
