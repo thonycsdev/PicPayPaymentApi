@@ -9,6 +9,7 @@ namespace Application.AutoMapper
         public AutoMapperConfigProfile()
         {
             CreateMap<Usuario, UsuarioResponse>();
+            CreateMap<Lojista, LojistaResponse>();
         }
     }
 
