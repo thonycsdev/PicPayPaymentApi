@@ -7,6 +7,5 @@ namespace Domain.Entities
         public string Email { get; set; } = string.Empty;
         public string Senha { get; set; } = string.Empty;
         public float Saldo { get; set; } = 0f;
-
     }
 }

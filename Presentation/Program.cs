@@ -1,5 +1,6 @@
-using CrossCutting.DependencyInjection.RepositoryDI;
 using CrossCutting.DependencyInjection.DatabaseDI;
+using CrossCutting.DependencyInjection.RepositoryDI;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,4 +23,3 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
-

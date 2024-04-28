@@ -4,16 +4,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories
 {
-
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T>
+        where T : BaseEntity
     {
         private readonly DbSet<T> _entity;
         private readonly DatabaseContext _context;
+
         public Repository(DatabaseContext context)
         {
             _context = context;
             _entity = context.Set<T>();
         }
+
         public async Task Commit()
         {
             await _context.SaveChangesAsync();

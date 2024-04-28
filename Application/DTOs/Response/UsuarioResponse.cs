@@ -1,6 +1,5 @@
 namespace Application.DTOs.Response
 {
-
     public class UsuarioResponse
     {
         public Guid Id { get; set; }

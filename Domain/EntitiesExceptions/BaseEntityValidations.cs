@@ -2,7 +2,6 @@ using Domain.Entities;
 
 namespace Domain.EntitiesExceptions
 {
-
     public class BaseEntityValidation
     {
         public List<string> ErrosList = new List<string>();
@@ -10,9 +9,9 @@ namespace Domain.EntitiesExceptions
         public List<string> Validate(BaseEntity entity)
         {
             ValidateNome(entity.Nome)
-            .ValidateEmail(entity.Email)
-            .ValidadePassword(entity.Senha)
-            .ValidateSaldoInicial(entity.Saldo);
+                .ValidateEmail(entity.Email)
+                .ValidadePassword(entity.Senha)
+                .ValidateSaldoInicial(entity.Saldo);
             return this.ErrosList;
         }
 
@@ -37,6 +36,7 @@ namespace Domain.EntitiesExceptions
 
             return this;
         }
+
         public BaseEntityValidation ValidadePassword(string password)
         {
             const string ERRO_MSG = "Senha invalida";
@@ -46,6 +46,7 @@ namespace Domain.EntitiesExceptions
 
             return this;
         }
+
         public BaseEntityValidation ValidateSaldoInicial(float saldo)
         {
             const string ERRO_MSG = "Saldo invalido";

@@ -8,12 +8,16 @@ namespace Application.UseCases.Usuarios.Create
     public class CreateUsuarioUseCase : ICreateUsuarioUseCase
     {
         private readonly IUsuarioRepository _repository;
+
         public CreateUsuarioUseCase(IUsuarioRepository repository)
         {
             _repository = repository;
-
         }
-        public async Task<ObjectResponse<UsuarioResponse>> Handle(UsuarioRequest request, CancellationToken cancellationToken)
+
+        public async Task<ObjectResponse<UsuarioResponse>> Handle(
+            UsuarioRequest request,
+            CancellationToken cancellationToken
+        )
         {
             var entity = UsuarioRequest.ToEntity(request);
             var validator = new BaseEntityValidation();
@@ -23,13 +27,11 @@ namespace Application.UseCases.Usuarios.Create
             {
                 rsp.AddErrors(validationResults);
                 return rsp.ReturnError(null);
-
             }
             await _repository.Create(entity);
             await _repository.Commit();
 
             return rsp.ReturnSucess(null);
-
         }
     }
 }

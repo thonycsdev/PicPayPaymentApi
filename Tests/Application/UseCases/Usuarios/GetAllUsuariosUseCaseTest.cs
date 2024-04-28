@@ -8,10 +8,10 @@ using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
-
     public class GetAllUseCaseTest : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
+
         public GetAllUseCaseTest()
         {
             _repositoryMock = new Mock<IUsuarioRepository>();
@@ -20,7 +20,6 @@ namespace Tests.Application.UseCases.Usuarios
         [Fact]
         public async void ShouldReturnTheListOfUsuarioResponse()
         {
-
             var usuarios = new List<Usuario>();
             for (int x = 0; x < 5; x++)
                 usuarios.Add(CreateValidUsuario());
@@ -33,7 +32,5 @@ namespace Tests.Application.UseCases.Usuarios
             results.Status.Should().Be(StatusCodeObjectResponse.Sucess);
             results.Data.Should().HaveCount(5);
         }
-
-
     }
 }

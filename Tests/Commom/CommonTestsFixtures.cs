@@ -1,14 +1,14 @@
 using Application.AutoMapper;
 using AutoFixture;
 using AutoMapper;
-using Domain.Entities;
-using Bogus.Extensions.Brazil;
 using Bogus;
+using Bogus.Extensions.Brazil;
+using Domain.Entities;
 using Infra;
 using Microsoft.EntityFrameworkCore;
+
 namespace Tests.Commom
 {
-
     public class CommomTestFixture
     {
         public Fixture _fixture;
@@ -26,7 +26,6 @@ namespace Tests.Commom
 
             _mapper = mockMapper.CreateMapper();
         }
-
 
         public Lojista CreateValidLojista()
         {
@@ -50,14 +49,13 @@ namespace Tests.Commom
             return usuario;
         }
 
-
         public DatabaseContext CreateInMemoryDatabaseContext()
         {
             var opt = new DbContextOptionsBuilder<DatabaseContext>()
-               .UseInMemoryDatabase(databaseName: DateTime.Now.Ticks.ToString()).Options;
+                .UseInMemoryDatabase(databaseName: DateTime.Now.Ticks.ToString())
+                .Options;
             var context = new DatabaseContext(opt);
             return context;
         }
     }
-
 }

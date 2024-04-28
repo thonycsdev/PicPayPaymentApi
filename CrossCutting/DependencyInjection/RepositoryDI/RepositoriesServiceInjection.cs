@@ -11,6 +11,4 @@ namespace CrossCutting.DependencyInjection.RepositoryDI
             service.AddScoped<IUsuarioRepository, UsuarioRepository>();
         }
     }
-
 }
-

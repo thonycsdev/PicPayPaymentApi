@@ -6,7 +6,6 @@ using FluentAssertions;
 
 namespace Tests.Application.Entities
 {
-
     public class BaseEntityValidationTests
     {
         private readonly Fixture _fixture;
@@ -17,6 +16,7 @@ namespace Tests.Application.Entities
             _fixture = new Fixture();
             _faker = new Faker();
         }
+
         [Fact]
         public void GivenCorrectValuesOfDataShouldReturnAEmptyListAsErrorMsg()
         {
@@ -28,6 +28,7 @@ namespace Tests.Application.Entities
             var result = validator.Validate(usuario);
             result.Count.Should().Be(0);
         }
+
         [Theory]
         [InlineData("a@")]
         [InlineData("not_a_email.com")]
@@ -38,9 +39,12 @@ namespace Tests.Application.Entities
             validator.ValidateEmail(email);
             validator.ErrosList.Count.Should().Be(1);
         }
+
         [Theory]
         [InlineData("a@")]
-        [InlineData("morethen255Charaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
+        [InlineData(
+            "morethen255Charaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        )]
         public void GivenAInvalidPasswordShouldAddAErrorMsgTotheList(string password)
         {
             var validator = new BaseEntityValidation();
@@ -48,6 +52,7 @@ namespace Tests.Application.Entities
             validator.ValidadePassword(password);
             validator.ErrosList.Count.Should().Be(1);
         }
+
         [Fact]
         public void GivenANegativeSaldoShouldAddAErrorToTheList()
         {

@@ -6,13 +6,16 @@ namespace Application.UseCases.Usuarios.GetById
     public class GetUserByIdUseCase : IGetUsuarioByIdUseCase
     {
         private readonly IUsuarioRepository _repository;
+
         public GetUserByIdUseCase(IUsuarioRepository repository)
         {
             _repository = repository;
-
         }
 
-        public async Task<ObjectResponse<UsuarioResponse>> Handle(GetUsuarioByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ObjectResponse<UsuarioResponse>> Handle(
+            GetUsuarioByIdQuery request,
+            CancellationToken cancellationToken
+        )
         {
             var result = await _repository.GetById(request.Id);
             var rsp = new ObjectResponse<UsuarioResponse>();

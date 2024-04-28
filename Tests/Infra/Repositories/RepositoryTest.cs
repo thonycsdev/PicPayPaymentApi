@@ -6,18 +6,14 @@ using Tests.Commom;
 
 namespace Tests.Infra.Repositories
 {
-
-
     public class RepositoryTests : CommomTestFixture
     {
-
         private readonly DatabaseContext _context;
 
         public RepositoryTests()
         {
             _context = CreateInMemoryDatabaseContext();
         }
-
 
         [Fact]
         public async void ShouldAddAUsuarioInTheDatabaseList()
@@ -29,9 +25,8 @@ namespace Tests.Infra.Repositories
 
             var result = _context.Set<Usuario>().ToList();
             result.Count.Should().Be(1);
-
-
         }
+
         [Fact]
         public async void ShouldAddAndThenDeleteTheInsertedUser()
         {
@@ -44,6 +39,7 @@ namespace Tests.Infra.Repositories
             var result = _context.Set<Usuario>().ToList();
             result.Count.Should().Be(0);
         }
+
         [Fact]
         public async void ShouldFindTheAddedUsuarioByHisId()
         {
@@ -58,6 +54,7 @@ namespace Tests.Infra.Repositories
 
             result.Id.Should().Be(usuario.Id);
         }
+
         [Fact]
         public async void ShouldReturnTheListWithTheCorrectCountOfUsuariosInDatabase()
         {
@@ -89,5 +86,4 @@ namespace Tests.Infra.Repositories
 
         //update
     }
-
 }

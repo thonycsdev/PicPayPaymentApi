@@ -6,6 +6,5 @@ namespace Application.UseCase.Lojistas
     {
         Task<ObjectResponse<LojistaResponse>> GetLojistaById(Guid id);
         Task<ObjectResponse<List<LojistaResponse>>> GetAllLojistas();
-
     }
 }

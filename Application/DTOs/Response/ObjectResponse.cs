@@ -2,7 +2,6 @@ namespace Application.DTOs.Response
 {
     public class ObjectResponse<T>
     {
-
         public StatusCodeObjectResponse Status { get; set; } = StatusCodeObjectResponse.Sucess;
         public List<string> Message { get; set; } = new List<string>();
         public T? Data { get; set; }
@@ -15,7 +14,6 @@ namespace Application.DTOs.Response
             this.Data = data;
             return this;
         }
-
 
         public ObjectResponse<T> ReturnError(T? data)
         {
@@ -35,15 +33,12 @@ namespace Application.DTOs.Response
         {
             this.Message.Add(msg);
         }
+
         public void AddErrors(List<string> msg)
         {
             this.Message = msg;
         }
-
-
     }
-
-
 
     public enum StatusCodeObjectResponse
     {
@@ -51,5 +46,4 @@ namespace Application.DTOs.Response
         Error = 500,
         NotFound = 401
     }
-
 }

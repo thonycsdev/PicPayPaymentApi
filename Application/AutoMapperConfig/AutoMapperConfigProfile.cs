@@ -12,5 +12,4 @@ namespace Application.AutoMapper
             CreateMap<Lojista, LojistaResponse>();
         }
     }
-
 }

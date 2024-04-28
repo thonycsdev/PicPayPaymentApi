@@ -5,7 +5,6 @@ namespace Tests.Application.Entities
 {
     public class UsuarioTests
     {
-
         [Fact]
         public void UsuarioShoulHaveCPFProperty()
         {

@@ -4,11 +4,11 @@ using Infra.RepositoriesInterfaces;
 
 namespace Application.UseCase.Lojistas
 {
-
     public class LojistasService : ILojistaService
     {
         private readonly ILojistaRepository _repository;
         private readonly IMapper _mapper;
+
         public LojistasService(ILojistaRepository repository, IMapper mapper)
         {
             _repository = repository;
@@ -35,9 +35,6 @@ namespace Application.UseCase.Lojistas
 
             var response = _mapper.Map<LojistaResponse>(entity);
             return rsp.ReturnSucess(response);
-
-
         }
     }
-
 }

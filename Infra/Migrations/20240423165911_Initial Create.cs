@@ -25,7 +25,8 @@ namespace Infra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lojistas", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "Usuarios",
@@ -41,17 +42,16 @@ namespace Infra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.Id);
-                });
+                }
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Lojistas");
+            migrationBuilder.DropTable(name: "Lojistas");
 
-            migrationBuilder.DropTable(
-                name: "Usuarios");
+            migrationBuilder.DropTable(name: "Usuarios");
         }
     }
 }

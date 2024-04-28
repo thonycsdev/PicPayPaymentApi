@@ -10,10 +10,10 @@ using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
-
     public class CreateUsuarioUseCaseTests : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
+
         public CreateUsuarioUseCaseTests()
         {
             _repositoryMock = new Mock<IUsuarioRepository>();
@@ -22,17 +22,18 @@ namespace Tests.Application.UseCases.Usuarios
         [Fact]
         public async void ShouldCreateANewUsuarioOnTheDatabase()
         {
-
             var usuarioInput = _fixture.Create<UsuarioRequest>();
             _fixture.Create<LojistaRequest>();
             usuarioInput.Email = _faker.Person.Email;
             var uc = new CreateUsuarioUseCase(_repositoryMock.Object);
 
             var listaUsuarios = new List<Usuario>();
-            _repositoryMock.Setup(x => x.Create(It.IsAny<Usuario>())).Callback<Usuario>(x =>
-            {
-                listaUsuarios.Add(x);
-            });
+            _repositoryMock
+                .Setup(x => x.Create(It.IsAny<Usuario>()))
+                .Callback<Usuario>(x =>
+                {
+                    listaUsuarios.Add(x);
+                });
             var result = await uc.Handle(usuarioInput, CancellationToken.None);
 
             listaUsuarios.Count.Should().Be(1);
@@ -42,7 +43,6 @@ namespace Tests.Application.UseCases.Usuarios
         }
 
         [Fact]
-
         public async Task NotGivenANameInUsuarioRequestShouldReturnObjectErrorWithAMessageAsync()
         {
             var usuarioInput = _fixture.Build<UsuarioRequest>().Without(x => x.Nome).Create();

@@ -10,14 +10,12 @@ namespace Tests.Application.UseCases.Lojistas
 {
     public class LojistaServiceTest : CommomTestFixture
     {
-
         private readonly Mock<ILojistaRepository> _repositoryMoq;
 
         public LojistaServiceTest()
         {
             _repositoryMoq = new Mock<ILojistaRepository>();
         }
-
 
         [Fact]
         public async void GivenALojistaIdShouldReturnTheCorrectLojista()
@@ -26,7 +24,9 @@ namespace Tests.Application.UseCases.Lojistas
             var lojistas = new List<Lojista>() { CreateValidLojista() };
             lojistas.Add(lojista1);
 
-            _repositoryMoq.Setup(x => x.GetById(It.IsAny<Guid>())).ReturnsAsync(lojistas.First(x => x.Id == lojista1.Id));
+            _repositoryMoq
+                .Setup(x => x.GetById(It.IsAny<Guid>()))
+                .ReturnsAsync(lojistas.First(x => x.Id == lojista1.Id));
 
             var service = new LojistasService(_repositoryMoq.Object, _mapper);
 
@@ -34,6 +34,7 @@ namespace Tests.Application.UseCases.Lojistas
 
             result.Status.Should().Be(StatusCodeObjectResponse.Sucess);
         }
+
         [Fact]
         public async void GivenALojistaIdThatIsntInTheListShouldReturnStatusError()
         {
@@ -51,6 +52,7 @@ namespace Tests.Application.UseCases.Lojistas
                 result.Status.Should().Be(StatusCodeObjectResponse.Error);
             }
         }
+
         [Fact]
         public async void ShouldReturnTheListWithAllLojistasInTheList()
         {
@@ -70,6 +72,4 @@ namespace Tests.Application.UseCases.Lojistas
             result.Data!.Count.Should().Be(5);
         }
     }
-
 }
-

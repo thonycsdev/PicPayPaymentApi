@@ -11,10 +11,10 @@ using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
-
     public class AdicionarSaldoUseCaseTest : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
+
         public AdicionarSaldoUseCaseTest()
         {
             _repositoryMock = new Mock<IUsuarioRepository>();
@@ -27,11 +27,7 @@ namespace Tests.Application.UseCases.Usuarios
             var oldSaldo = usuario.Saldo;
             _repositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).ReturnsAsync(usuario);
 
-            var input = new
-            {
-                id = usuario.Id,
-                valor = 1200
-            };
+            var input = new { id = usuario.Id, valor = 1200 };
 
             var uc = new AdicionarSaldoUseCase(_repositoryMock.Object);
 
@@ -40,9 +36,8 @@ namespace Tests.Application.UseCases.Usuarios
             var sum = oldSaldo + input.valor;
             usuario.Saldo.Should().Be(sum);
             result.Status.Should().Be(StatusCodeObjectResponse.Sucess);
-
-
         }
+
         [Fact]
         public async void ShouldReturnNotFoundWhenUsuarioWithIdWasNotMatched()
         {

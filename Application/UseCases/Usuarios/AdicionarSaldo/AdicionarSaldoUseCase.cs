@@ -7,10 +7,12 @@ namespace Application.UseCases.Usuarios.AdicionarSaldo
     public class AdicionarSaldoUseCase : IAdicionarSaldoUseCase
     {
         private readonly IUsuarioRepository _repository;
+
         public AdicionarSaldoUseCase(IUsuarioRepository repository)
         {
             _repository = repository;
         }
+
         public async Task<ObjectResponse<string>> Handle(Guid id, float valor)
         {
             var usuario = await _repository.GetById(id);
@@ -27,4 +29,3 @@ namespace Application.UseCases.Usuarios.AdicionarSaldo
         }
     }
 }
-

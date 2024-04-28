@@ -1,13 +1,13 @@
+using Application.AutoMapper;
 using Application.UseCases.Usuarios.AdicionarSaldo;
 using Application.UseCases.Usuarios.ChangePassword;
 using Application.UseCases.Usuarios.Create;
 using Application.UseCases.Usuarios.Delete;
 using Application.UseCases.Usuarios.GetAll;
-using Application.UseCases.Usuarios.Update;
 using Application.UseCases.Usuarios.GetById;
 using Application.UseCases.Usuarios.Transferencia;
+using Application.UseCases.Usuarios.Update;
 using Microsoft.Extensions.DependencyInjection;
-using Application.AutoMapper;
 
 namespace CrossCutting.DependencyInjection.RepositoryDI
 {
@@ -28,11 +28,9 @@ namespace CrossCutting.DependencyInjection.RepositoryDI
             service.AddAutoMapper(typeof(AutoMapperConfigProfile));
             //mediatr
             //
-            service.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(GetUsuarioByIdQuery).Assembly));
-
-
+            service.AddMediatR(conf =>
+                conf.RegisterServicesFromAssembly(typeof(GetUsuarioByIdQuery).Assembly)
+            );
         }
     }
-
 }
-

@@ -12,7 +12,6 @@ namespace Application.DTOs.Request
         public float Saldo { get; set; } = 0f;
         public string CPF { get; set; } = string.Empty;
 
-
         public static Usuario ToEntity(UsuarioRequest req)
         {
             var usuario = new Usuario
@@ -25,7 +24,5 @@ namespace Application.DTOs.Request
             };
             return usuario;
         }
-
     }
-
 }

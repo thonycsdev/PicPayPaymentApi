@@ -7,10 +7,12 @@ namespace Application.UseCases.Usuarios.ChangePassword
     public class ChangePasswordUseCase : IChangePasswordUseCase
     {
         private readonly IUsuarioRepository _repository;
+
         public ChangePasswordUseCase(IUsuarioRepository repository)
         {
             _repository = repository;
         }
+
         public async Task<ObjectResponse<UsuarioResponse>> Handle(Guid id, string newPassword)
         {
             var validator = new BaseEntityValidation();
@@ -33,7 +35,6 @@ namespace Application.UseCases.Usuarios.ChangePassword
             };
             return rsp.ReturnSucess(response);
             throw new NotImplementedException();
-
         }
     }
 }

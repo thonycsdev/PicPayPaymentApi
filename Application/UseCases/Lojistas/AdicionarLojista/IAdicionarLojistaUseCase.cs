@@ -4,9 +4,6 @@ using MediatR;
 
 namespace Application.UseCases.Lojistas.AdicionarLojista
 {
-    public interface IAdicionarLojistaUseCase : IRequestHandler<LojistaRequest, ObjectResponse<LojistaResponse>>
-    {
-
-    }
-
+    public interface IAdicionarLojistaUseCase
+        : IRequestHandler<LojistaRequest, ObjectResponse<LojistaResponse>> { }
 }

@@ -4,9 +4,6 @@ using MediatR;
 
 namespace Application.UseCases.Usuarios.Delete
 {
-
-    public interface IDeleteUsuarioUseCase : IRequestHandler<DeleteUsuarioById, ObjectResponse<UsuarioResponse>>
-    {
-    }
-
+    public interface IDeleteUsuarioUseCase
+        : IRequestHandler<DeleteUsuarioById, ObjectResponse<UsuarioResponse>> { }
 }

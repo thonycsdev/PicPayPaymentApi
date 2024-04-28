@@ -7,9 +7,14 @@ namespace CrossCutting.DependencyInjection.DatabaseDI
 {
     public static class DatabaseServiceInjection
     {
-        public static void AddDatabase(this IServiceCollection service, IConfiguration configuration)
+        public static void AddDatabase(
+            this IServiceCollection service,
+            IConfiguration configuration
+        )
         {
-            service.AddDbContext<DatabaseContext>(x => x.UseNpgsql(configuration.GetConnectionString("Local_Database")));
+            service.AddDbContext<DatabaseContext>(x =>
+                x.UseNpgsql(configuration.GetConnectionString("Local_Database"))
+            );
         }
     }
 }

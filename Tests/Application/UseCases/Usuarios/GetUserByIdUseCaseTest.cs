@@ -8,10 +8,10 @@ using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
-
     public class GetUserByIdUseCaseTest : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
+
         public GetUserByIdUseCaseTest()
         {
             _repositoryMock = new Mock<IUsuarioRepository>();
@@ -20,11 +20,12 @@ namespace Tests.Application.UseCases.Usuarios
         [Fact]
         public async void SHouldReturnTheUsuarioWithTheSameId()
         {
-
             var usuario1 = CreateValidUsuario();
             var listResult = new List<Usuario>() { usuario1 };
 
-            _repositoryMock.Setup(x => x.GetById(It.IsAny<Guid>())).ReturnsAsync(listResult.First(x => x.Id == usuario1.Id));
+            _repositoryMock
+                .Setup(x => x.GetById(It.IsAny<Guid>()))
+                .ReturnsAsync(listResult.First(x => x.Id == usuario1.Id));
 
             var uc = new GetUserByIdUseCase(_repositoryMock.Object);
             var input = new GetUsuarioByIdQuery(usuario1.Id);
@@ -38,10 +39,8 @@ namespace Tests.Application.UseCases.Usuarios
             result.Data!.Saldo.Should().Be(usuario1.Saldo);
         }
 
-
         [Fact]
         public async void GivenAIdAndUserWasNotFoundShouldReturnErrorStatus()
-
         {
             var usuario1 = CreateValidUsuario();
             var listResult = new List<Usuario>() { };

@@ -5,16 +5,19 @@ using Infra.RepositoriesInterfaces;
 
 namespace Application.UseCases.Usuarios.Delete
 {
-
     public class UpdateUsuarioUseCase : IUpdateUsuarioUseCase
     {
         private readonly IUsuarioRepository _repository;
+
         public UpdateUsuarioUseCase(IUsuarioRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<ObjectResponse<UsuarioResponse>> Handle(UpdateUsuarioRequest request, CancellationToken cancellationToken)
+        public async Task<ObjectResponse<UsuarioResponse>> Handle(
+            UpdateUsuarioRequest request,
+            CancellationToken cancellationToken
+        )
         {
             var data = UsuarioRequest.ToEntity(request.request);
             var entity = await _repository.GetById(request.usuario_toEdit_Id);
@@ -39,4 +42,3 @@ namespace Application.UseCases.Usuarios.Delete
         }
     }
 }
-

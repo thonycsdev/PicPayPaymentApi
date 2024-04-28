@@ -9,10 +9,10 @@ using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
-
     public class UpdateUsuarioUseCaseTest : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
+
         public UpdateUsuarioUseCaseTest()
         {
             _repositoryMock = new Mock<IUsuarioRepository>();
@@ -37,7 +37,6 @@ namespace Tests.Application.UseCases.Usuarios
             result.Data.Email.Should().Be(usuario1.request.Email);
             result.Data.CPF.Should().Be(usuario1.request.CPF);
             result.Data.Saldo.Should().Be(usuario1.request.Saldo);
-
         }
     }
 }

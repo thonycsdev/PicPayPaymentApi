@@ -8,10 +8,10 @@ using Tests.Commom;
 
 namespace Tests.Application.UseCases.Usuarios
 {
-
     public class ChangePasswordUseCaseTest : CommomTestFixture
     {
         public Mock<IUsuarioRepository> _repositoryMock;
+
         public ChangePasswordUseCaseTest()
         {
             _repositoryMock = new Mock<IUsuarioRepository>();
@@ -32,9 +32,8 @@ namespace Tests.Application.UseCases.Usuarios
             usuario1.Senha.Should().Be(newPassword);
             _repositoryMock.Verify(x => x.Update(It.IsAny<Usuario>()), Times.Once);
             _repositoryMock.Verify(x => x.Commit(), Times.Once);
-
-
         }
+
         [Fact]
         public async void ShouldReturnErrorWhenUserInsertInvalidPassword()
         {
@@ -47,7 +46,6 @@ namespace Tests.Application.UseCases.Usuarios
             var result = await uc.Handle(usuario1.Id, newPassword);
             result.Status.Should().Be(StatusCodeObjectResponse.Error);
             _repositoryMock.Verify(x => x.Commit(), Times.Never);
-
         }
     }
 }

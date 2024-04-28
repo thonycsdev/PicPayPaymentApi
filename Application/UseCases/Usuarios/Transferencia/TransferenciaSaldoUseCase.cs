@@ -8,14 +8,17 @@ namespace Application.UseCases.Usuarios.Transferencia
     {
         private readonly IUsuarioRepository _repository;
         private readonly IMapper _mapper;
+
         public TransferenciaUseCase(IUsuarioRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
-
         }
 
-        public async Task<(ObjectResponse<UsuarioResponse>, ObjectResponse<UsuarioResponse>)> Handle(Guid payer_id, Guid receiver_id, float amount)
+        public async Task<(
+            ObjectResponse<UsuarioResponse>,
+            ObjectResponse<UsuarioResponse>
+        )> Handle(Guid payer_id, Guid receiver_id, float amount)
         {
             var rsp_payer = new ObjectResponse<UsuarioResponse>();
             var rsp_receiver = new ObjectResponse<UsuarioResponse>();
@@ -38,8 +41,10 @@ namespace Application.UseCases.Usuarios.Transferencia
             var response_payer = _mapper.Map<UsuarioResponse>(payer);
             var response_receiver = _mapper.Map<UsuarioResponse>(receiver);
 
-            return (rsp_payer.ReturnSucess(response_payer), rsp_receiver.ReturnSucess(response_receiver));
+            return (
+                rsp_payer.ReturnSucess(response_payer),
+                rsp_receiver.ReturnSucess(response_receiver)
+            );
         }
     }
 }
-

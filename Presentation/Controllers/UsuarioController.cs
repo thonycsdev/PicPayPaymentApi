@@ -14,6 +14,7 @@ namespace Presentation.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IMediator _mediator;
+
         public UsuarioController(IMediator mediator)
         {
             _mediator = mediator;
@@ -29,8 +30,11 @@ namespace Presentation.Controllers
             }
             return Ok(result);
         }
+
         [HttpPost]
-        public async Task<ActionResult<ObjectResponse<UsuarioResponse>>> CreateUsuario(UsuarioRequest input)
+        public async Task<ActionResult<ObjectResponse<UsuarioResponse>>> CreateUsuario(
+            UsuarioRequest input
+        )
         {
             var result = await _mediator.Send(input);
             if (result.Status != StatusCodeObjectResponse.Sucess)
@@ -50,6 +54,7 @@ namespace Presentation.Controllers
             }
             return Ok(result);
         }
+
         [HttpDelete]
         public async Task<ActionResult<ObjectResponse<UsuarioResponse>>> DeleteUsuario(Guid id)
         {
@@ -60,8 +65,12 @@ namespace Presentation.Controllers
             }
             return Ok(result);
         }
+
         [HttpDelete]
-        public async Task<ActionResult<ObjectResponse<UsuarioResponse>>> UpdateUsuario(Guid usuario_id, UsuarioRequest input)
+        public async Task<ActionResult<ObjectResponse<UsuarioResponse>>> UpdateUsuario(
+            Guid usuario_id,
+            UsuarioRequest input
+        )
         {
             var result = await _mediator.Send(new UpdateUsuarioRequest());
             if (result.Status != StatusCodeObjectResponse.Sucess)
@@ -69,8 +78,6 @@ namespace Presentation.Controllers
                 return NotFound(result);
             }
             return Ok(result);
-
         }
-
     }
 }

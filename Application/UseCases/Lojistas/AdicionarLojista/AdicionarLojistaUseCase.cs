@@ -8,12 +8,16 @@ namespace Application.UseCases.Lojistas.AdicionarLojista
     public class AdicionarLojistaUseCase : IAdicionarLojistaUseCase
     {
         private readonly ILojistaRepository _repository;
+
         public AdicionarLojistaUseCase(ILojistaRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<ObjectResponse<LojistaResponse>> Handle(LojistaRequest request, CancellationToken cancellationToken)
+        public async Task<ObjectResponse<LojistaResponse>> Handle(
+            LojistaRequest request,
+            CancellationToken cancellationToken
+        )
         {
             var entity = LojistaRequest.ToEntity(request);
             var validator = new BaseEntityValidation();
@@ -28,8 +32,6 @@ namespace Application.UseCases.Lojistas.AdicionarLojista
             await _repository.Commit();
 
             return rsp.ReturnSucess(null);
-
         }
     }
-
 }
